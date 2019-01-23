@@ -1,0 +1,96 @@
+body {
+  min-width: 320px;
+  min-height: 480px;
+}
+
+.hud-controlgroup {
+  text-align: center;
+}
+
+#dashboardLink, #lessonsLink, #reviewsLink {
+  color: blue;
+}
+
+#levelProgress {
+  background-color: #CCC;
+  width: 100%;
+  line-height: 2em;
+}
+
+#radicalBar, #kanjiBar {
+  display: inline-block;
+}
+
+#radicalBar {
+  background-color: #0AF;
+  float: left;
+}
+
+#kanjiBar {
+  background-color: #F0A;
+}
+
+#radicalPercent, #kanjiPercent {
+  padding: 10px;
+}
+
+div.ui-slider-switch {
+  position: absolute !important;
+  top: 0.5em !important;
+  right: 1em !important;
+}
+
+#lessonReorderSequenceList .radicals {
+  color: #0AF;
+}
+
+#lessonReorderSequenceList .kanji {
+  color: #F0A;
+}
+
+#lessonReorderSequenceList .vocabulary {
+  color: #A0F;
+}
+
+.review.sortable-item {
+  cursor: pointer;
+}
+
+.type, .category {
+  display: inline-block;
+  width: 6em;
+  padding: 0 .25em
+}
+
+.type {
+  text-align: right;
+}
+
+.type.current {
+  color: red;
+}
+
+.type.unburned {
+  color: blue;
+}
+
+.type.burnable {
+  color: black;
+}
+
+.category.radicals, .lesson.radicals {
+  color: #0AF;
+}
+
+.category.kanji, .lesson.kanji {
+  color: #F0A;
+}
+
+.category.vocabulary, .lesson.vocabulary {
+  color: #A0F;
+}
+
+.lesson.sortable-item {
+  cursor: pointer;
+  text-align: center;
+}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Wanikani Augmenter</title>
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/jquery.mobile.css">
+    <link rel="stylesheet" href="/css/flick/jquery-ui-1.10.4.custom.css">
+    <link rel="stylesheet" href="/css/popup/popup.css">
+
+    <script src="/js/lib/jquery.js"></script>
+    <script src="/js/lib/jquery-ui.js"></script>
+    <script src="/js/lib/jquery.mobile.js"></script>
+    <script src="/js/popup/popup.js"></script>
+    <script src="/js/popup/options.js"></script>
+
+  </head>
+  <body>
+    <div id="hud" data-role="page">
+      <div id="hudHeader" data-role="header">
+        <h6>Wanikani Augmenter</h6>
+        <a href="#settings" class="ui-btn ui-btn-right ui-corner-all ui-icon-gear ui-btn-icon-notext" data-transition="slide"></a>
+      </div>
+
+      <div id="title">Progress:</div>
+      <div id="levelProgress">
+        <div id="radicalBar"><span id="radicalPercent"></span></div>
+        <div id="kanjiBar"><span id="kanjiPercent"></span></div>
+      </div>
+      <div class="hud-controlgroup" data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <a href="https://www.wanikani.com/dashboard" id="dashboardLink" class="ui-btn">Dashboard</a>
+        <a href="https://www.wanikani.com/lesson/session" id="lessonsLink" class="ui-btn">Lessons <span id="lessonCount"></span></a>
+        <a href="https://www.wanikani.com/review/session" id="reviewsLink" class="ui-btn">Reviews <span id="reviewCount"></span></a>
+      </div>
+
+      <button id="refreshButton" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-recycle">refresh data</button>
+
+    </div>
+
+    <div id="settings" data-role="page">
+      <div id="settingsHeader" data-role="header" data-add-back-btn="true">
+        <h6>Settings</h6>
+      </div>
+        <form>
+          <ul id="settingsList" data-role="listview">
+            <li><a href="#lessonSession" data-transition="slide">Lessons</a></li>
+            <li><a href="#reviewSession" data-transition="slide">Reviews</a></li>
+
+            <li class="ui-field-contain">
+              <label for="apiKey">API Key:</label>
+              <input type="text" name="apiKey" id="apiKey" value="">
+            </li>
+
+            <li class="ui-field-contain">
+              <label for="dashboardChartEnabled">Dashboard chart:</label>
+              <select name="dashboardChartEnabled" id="dashboardChartEnabled" data-role="slider">
+                <option value="false">Off</option>
+                <option value="true">On</option>
+              </select>
+            </li>
+
+            <li class="ui-field-contain">
+              <label for="realNumbersEnabled">Show real numbers:</label>
+              <select name="realNumbersEnabled" id="realNumbersEnabled" data-role="slider">
+                <option value="false">Off</option>
+                <option value="true">On</option>
+              </select>
+            </li>
+          </ul>
+        </form>
+    </div>
+
+    <div id="lessonSession" data-role="page">
+      <div id="lessonsHeader" data-role="header" data-add-back-btn="true">
+        <h6>Lessons</h6>
+      </div>
+      <ul id="lessonList" data-role="listview">
+        <li><a href="#lessonSequenceSettings" data-transition="slide">Sequence</a></li>
+
+        <li class="ui-field-contain">
+          <label for="lessonReordering">Allow reordering:</label>
+          <select name="lessonReordering" id="lessonReordering" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+            <label for="priorityList">Priority:</label>
+            <input type="text" name="priorityList" id="priorityList" value="">
+        </li>
+
+        <li>
+          <p>This list will be checked before each reorder.</p>
+          <p>If any lessons are a match, they will be shown first.</p>
+          <p>(No spaces, and use commas to separate words)</p>
+        </li>
+      </ul>
+    </div>
+
+    <div id="lessonSequenceSettings" data-role="page">
+      <div id="lessonSequenceHeader" data-role="header" data-add-back-btn="true">
+        <h6>Sequence</h6>
+      </div>
+      <ul id="lessonReorderSequenceList" data-role="listview" data-inset="true">
+      </ul>
+    </div>
+
+    <div id="reviewSession" data-role="page">
+      <div id="reviewsHeader" data-role="header" data-add-back-btn="true">
+        <h6>Reviews</h6>
+      </div>
+      <ul id="reviewList" data-role="listview">
+        <li><a href="#reviewSequenceSettings" data-transition="slide">Sequence</a></li>
+
+        <li class="ui-field-contain">
+          <label for="reviewReordering">Reordering:</label>
+          <select name="reviewReordering" id="reviewReordering" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="mistakeDeletion">Mistake deletion:</label>
+          <select name="mistakeDeletion" id="mistakeDeletion" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="derandomizer">Random disabler:</label>
+          <select name="derandomizer" id="derandomizer" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="reviewInformationSRS">Show SRS:</label>
+          <select name="reviewInformationSRS" id="reviewInformationSRS" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="reviewInformationRadicals">Show radical count:</label>
+          <select name="reviewInformationRadicals" id="reviewInformationRadicals" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="reviewInformationKanji">Show kanji count</label>
+          <select name="reviewInformationKanji" id="reviewInformationKanji" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+
+        <li class="ui-field-contain">
+          <label for="reviewInformationVocabulary">Show vocabulary count:</label>
+          <select name="reviewInformationVocabulary" id="reviewInformationVocabulary" data-role="slider">
+            <option value="false">Off</option>
+            <option value="true">On</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+
+    <div id="reviewSequenceSettings" data-role="page">
+      <div id="reviewSequenceHeader" data-role="header" data-add-back-btn="true">
+        <h6>Sequence</h6>
+      </div>
+      <ul id="reviewReorderSequenceList" data-role="listview" data-inset="true">
+      </ul>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wanikani Augmenter",
+  "author": "maneKozaru",
+  "version": "0.20",
+  "description": "An extension to improve the UX of www.wanikani.com",
+  "icons": {
+    "128": "/images/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "/images/logo.png",
+    "default_title": "Wanikani Augmenter",
+    "default_popup": "/html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/js/lib/jquery.js",
+      "/js/background/main.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*.wanikani.com/",
+    "alarms",
+    "storage",
+    "tabs",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wanikani.com/*"
+      ],
+      "js": [
+        "/js/lib/jquery.js",
+        "/js/global/realNumbers.js",
+        "/js/review/session.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wanikani.com/dashboard",
+        "*://*.wanikani.com/"
+      ],
+      "js": [
+        "/js/lib/jquery.js",
+        "/js/lib/highcharts.js",
+        "/js/dashboard/chart.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wanikani.com/lesson/session"
+      ],
+      "js": [
+        "/js/lib/jquery.js",
+        "/js/lesson/session.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/js/lib/jquery-ui.js",
+    "/js/review/reordering.js",
+    "/js/review/randomOverride.js",
+    "/js/review/information.js",
+    "/js/review/deletion.js",
+    "/js/lesson/reordering.js"
+  ]
+}
