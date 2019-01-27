@@ -121,6 +121,7 @@ String.prototype.dedashAndCapitalize = function() {
 
   wanikaniAugmenter.checkApi = function() {
     if(wanikaniAugmenter.data.apiKey === "") {
+      return;
       if (confirm("We need to get your API key before Wanikani-Helper can function correctly. We can do it automatically now, if you like?")) {
         chrome.tabs.query(
           {
